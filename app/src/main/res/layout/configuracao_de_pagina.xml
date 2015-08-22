@@ -1,0 +1,118 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ConfigPagina" >
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="35dp"
+        android:text="Paisagem"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="18dp"
+        android:text="Cor:"
+        android:textSize="20sp" />
+
+    <ToggleButton
+        android:id="@+id/tbtnCor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="41dp"
+        android:text="ToggleButton" />
+
+    <ToggleButton
+        android:id="@+id/tbtnPaisagem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignLeft="@+id/tbtnCor"
+        android:text="ToggleButton" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/tbtnPaisagem"
+        android:layout_marginTop="39dp"
+        android:text="Intervalo:"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/txtIntervalo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView3"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignRight="@+id/tbtnPaisagem"
+        android:layout_toRightOf="@+id/textView2"
+        android:ems="10"
+        android:hint="Ex: 1-5" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/txtNumeroDeCopias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignLeft="@+id/txtIntervalo"
+        android:layout_alignRight="@+id/txtIntervalo"
+        android:ems="10"
+        android:hint="Ex: 2" />
+        android:text="Imprimir" />
+
+    
+
+    <RadioButton
+        android:id="@+id/rdbTodas_Paginas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tbtnPaisagem"
+        android:layout_below="@+id/txtIntervalo"
+        android:layout_marginTop="14dp"
+        android:text="Todas" />
+
+    <Button
+        android:id="@+id/btnImprimir"
+        style="@style/botao_verde"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="33dp"
+        android:background="@drawable/botao_verde"
+        android:text="Imprimir"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_centerVertical="true"
+        android:text="Cópias:"
+        android:textSize="20sp" />
+
+</RelativeLayout>
