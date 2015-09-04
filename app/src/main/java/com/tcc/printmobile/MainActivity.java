@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,8 +16,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
+
 	private final Activity mActivity = this;
+
+	private Toolbar mToobar;
 
 	// private final Context mContext = this;
 
@@ -27,8 +32,13 @@ public class MainActivity extends Activity {
 		Button btPDF = (Button) findViewById(R.id.btPDF);
 		Button btIMG = (Button) findViewById(R.id.btIMG);
 
-		/* AÇÃO NOS BOTÕES DA TELA INICIAL */
-		// DO BOTÃO "PDF" PARA SELECAO DE ARQUIVO
+		/*DONATO NÃƒO RETIRAR
+		mToobar = (Toolbar) findViewById(R.id.tb_main);
+		mToobar.setTitle("Print Mobile");
+		mToobar.setLogo(R.mipmap.icon);
+		setSupportActionBar(mToobar);
+		*/
+
 
 		btPDF.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -49,7 +59,7 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		// DO BOTÃO "IMG" PARA SELECAO DE ARQUIVO
+		// DO BOTï¿½O "IMG" PARA SELECAO DE ARQUIVO
 		btIMG.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
