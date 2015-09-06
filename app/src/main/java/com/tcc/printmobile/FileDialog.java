@@ -15,31 +15,8 @@ import android.util.Log;
 
 import com.tcc.printmobile.ListenerList.FireHandler;
 
-/*COMO UTILIZAR ESTA CLASSE
- * 
- * //Instancie um File passando o path inicial
-File mPath = new File(Environment.getExternalStorageDirectory() + "//AppsGame//");
-
-//Instancie o FileDialog passando a Activity e o File criado
-fileDialog = new FileDialog(getActivity(), mPath);
-
-//Use o método setFileEndsWith(String extensao) da Classe FileDialog para definir uma extensão
-fileDialog.setFileEndsWith(".txt");
-
-//adicione um listener dessa maneira para adicionar uma ação quando um item for selecionado
-fileDialog.addFileListener(new FileDialog.FileSelectedListener() {
-	public void fileSelected(File file) {
-		Log.d(getClass().getName(), "selected file " + file.toString());
-		edtPath.setText(file.toString());
-	}
-});
-
-//mostre o FileDialog
-fileDialog.showDialog();
-*/
-
 public class FileDialog {
-	private static final String PARENT_DIR = "..";
+	private static final String PARENT_DIR = ("< Back");
 	private final String TAG = getClass().getName();
 	private String[] fileList;
 	private File currentPath;
