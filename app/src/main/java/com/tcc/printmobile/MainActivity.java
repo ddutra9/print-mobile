@@ -32,12 +32,11 @@ public class MainActivity extends ActionBarActivity {
 		Button btPDF = (Button) findViewById(R.id.btPDF);
 		Button btIMG = (Button) findViewById(R.id.btIMG);
 
-		/*DONATO NÃO RETIRAR
 		mToobar = (Toolbar) findViewById(R.id.tb_main);
 		mToobar.setTitle("Print Mobile");
 		mToobar.setLogo(R.mipmap.icon);
 		setSupportActionBar(mToobar);
-		*/
+
 
 
 		btPDF.setOnClickListener(new View.OnClickListener() {
@@ -48,18 +47,16 @@ public class MainActivity extends ActionBarActivity {
 				fileDialog.setFileEndsWith(".pdf");
 				fileDialog.addFileListener(new FileDialog.FileSelectedListener() {
 						public void fileSelected(File file) {
-							Log.d(getClass().getName(), "selected file "
-									+ file.toString());
-							// edtPath.setText(file.toString());
+							Log.d(getClass().getName(), "Arquivo selecionado: "+ file.toString());
 						}
 				});
 
-				// mostre o FileDialog
+				// show the FileDialog
 				fileDialog.showDialog();
 			}
 		});
 
-		// DO BOT�O "IMG" PARA SELECAO DE ARQUIVO
+
 		btIMG.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -69,14 +66,13 @@ public class MainActivity extends ActionBarActivity {
 				fileDialog.setFileEndsWith(".jpg");
 				fileDialog.addFileListener(new FileDialog.FileSelectedListener() {
 						public void fileSelected(File file) {
-							Log.d(getClass().getName(), "selected file "
-									+ file.toString());
-							// edtPath.setText(file.toString());
+							Log.d(getClass().getName(), "Arquivo selecionado: "+ file.toString());
 						}
 				});
 
-				// mostre o FileDialog
+				// show the FIle
 				fileDialog.showDialog();
+
 
 			}
 		});

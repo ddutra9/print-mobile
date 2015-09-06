@@ -1,7 +1,7 @@
 <resources>
 
 
-    <style name="Theme.MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.MyTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- colorPrimary is used for the default action bar background -->
     <item name="colorPrimary">@color/colorPrimary</item>
 

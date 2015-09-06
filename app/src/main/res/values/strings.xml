@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">Print Mobile</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configurações</string>
+    <string name="tvHome">Selecione um tipo de arquivo...</string>
+
+
 
 </resources>
