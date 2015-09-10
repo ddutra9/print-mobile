@@ -78,7 +78,7 @@ public class MainActivity extends ActionBarActivity {
 							Log.d(getClass().getName(), "Arquivo selecionado: "+ file.toString());
 
 							Intent intent = new Intent(Intent.ACTION_VIEW);
-							intent.setDataAndType(Uri.fromFile(file), "application/jpg");
+							intent.setDataAndType(Uri.fromFile(file), "image/jpeg");
 							intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 							startActivity(intent);
 
