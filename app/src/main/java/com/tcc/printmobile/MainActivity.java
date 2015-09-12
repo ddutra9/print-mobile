@@ -14,10 +14,9 @@ import android.widget.Button;
 public class MainActivity extends ActionBarActivity {
 
 	private final Activity mActivity = this;
-	private static final int REQUEST_CODE = 1;
+	private static final int IMAGE_REQUEST = 0;
+	private static final int PDF_REQUEST = 1;
 	private Toolbar mToobar;
-
-	// private final Context mContext = this;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +31,6 @@ public class MainActivity extends ActionBarActivity {
 		mToobar.setLogo(R.mipmap.icon);
 		setSupportActionBar(mToobar);
 
-
-
 		btPDF.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -41,30 +38,28 @@ public class MainActivity extends ActionBarActivity {
 				intent.setType("application/pdf");
 				intent.setAction(Intent.ACTION_GET_CONTENT);
 				intent.addCategory(Intent.CATEGORY_OPENABLE);
-				startActivityForResult(intent, REQUEST_CODE);
+				startActivityForResult(intent, PDF_REQUEST);
 			}
 		});
 
 		btIMG.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
 				Intent intent = new Intent();
 				intent.setType("image/*");
 				intent.setAction(Intent.ACTION_GET_CONTENT);
 				intent.addCategory(Intent.CATEGORY_OPENABLE);
-				startActivityForResult(intent, REQUEST_CODE);
-
+				startActivityForResult(intent, IMAGE_REQUEST);
 			}
 		});
-
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK)
-		{
-			Log.d("teste", data.toString());
+		if (requestCode == IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+			Log.d("imagem teste", data.toString());
+		} else {
+			Log.d("pdf teste", data.toString());//here i am not sure if content here is a pdf or another file
 		}
 	}
 
