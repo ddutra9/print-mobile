@@ -1,27 +1,20 @@
 package com.tcc.printmobile;
 
-import java.io.File;
-
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
-import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
 
 	private final Activity mActivity = this;
-
+	private static final int REQUEST_CODE = 1;
 	private Toolbar mToobar;
 
 	// private final Context mContext = this;
@@ -44,54 +37,35 @@ public class MainActivity extends ActionBarActivity {
 		btPDF.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				File mPath = new File(Environment.getExternalStorageDirectory().toString());
-				FileDialog fileDialog = new FileDialog(mActivity, mPath);
-				fileDialog.setFileEndsWith(".pdf");
-				fileDialog.addFileListener(new FileDialog.FileSelectedListener() {
-						public void fileSelected(File file) {
-							Log.d(getClass().getName(), "Arquivo selecionado: "+ file.toString());
-
-							Intent intent = new Intent(Intent.ACTION_VIEW);
-							intent.setDataAndType(Uri.fromFile(file), "application/pdf");
-							intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-							startActivity(intent);
-
-
-						}
-				});
-
-				// show the FileDialog
-				fileDialog.showDialog();
+				Intent intent = new Intent();
+				intent.setType("application/pdf");
+				intent.setAction(Intent.ACTION_GET_CONTENT);
+				intent.addCategory(Intent.CATEGORY_OPENABLE);
+				startActivityForResult(intent, REQUEST_CODE);
 			}
 		});
-
 
 		btIMG.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
-				File mPath = new File(Environment.getExternalStorageDirectory().toString());
-				FileDialog fileDialog = new FileDialog(mActivity, mPath);
-				fileDialog.setFileEndsWith(".jpg");
-				fileDialog.addFileListener(new FileDialog.FileSelectedListener() {
-						public void fileSelected(File file) {
-							Log.d(getClass().getName(), "Arquivo selecionado: "+ file.toString());
-
-							Intent intent = new Intent(Intent.ACTION_VIEW);
-							intent.setDataAndType(Uri.fromFile(file), "application/jpg");
-							intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-							startActivity(intent);
-
-						}
-				});
-
-				// show the FIle
-				fileDialog.showDialog();
-
+				Intent intent = new Intent();
+				intent.setType("image/*");
+				intent.setAction(Intent.ACTION_GET_CONTENT);
+				intent.addCategory(Intent.CATEGORY_OPENABLE);
+				startActivityForResult(intent, REQUEST_CODE);
 
 			}
 		});
 
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK)
+		{
+			Log.d("teste", data.toString());
+		}
 	}
 
 	@Override
