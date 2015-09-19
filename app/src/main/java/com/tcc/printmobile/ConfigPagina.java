@@ -2,15 +2,25 @@ package com.tcc.printmobile;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class ConfigPagina extends Activity {
+public class ConfigPagina extends ActionBarActivity {
+
+	private Toolbar mToobar2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.configuracao_de_pagina);
+
+		mToobar2 = (Toolbar) findViewById(R.id.tb_confpagina);
+		mToobar2.setTitle("Configurar impressão");
+		mToobar2.setLogo(R.mipmap.icon);
+		setSupportActionBar(mToobar2);
+
 	}
 
 	@Override

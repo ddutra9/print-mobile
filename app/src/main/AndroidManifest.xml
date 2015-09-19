@@ -21,6 +21,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".PrintConfig"></activity>
+         <activity
+             android:name=".ConfigPagina"
+             android:label="Configurar impressão"></activity>
     </application>
 
 </manifest>
