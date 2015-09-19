@@ -19,11 +19,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".PrintConfig"></activity>
-         <activity
-             android:name=".ConfigPagina"
-             android:label="Configurar impressão"></activity>
+        </activity> <activity android:name=".PrintConfig"></activity>
     </application>
 
 </manifest>

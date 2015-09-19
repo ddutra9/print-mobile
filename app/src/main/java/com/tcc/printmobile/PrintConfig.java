@@ -3,7 +3,10 @@ package com.tcc.printmobile;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.tcc.printmobile.model.Img;
 
@@ -12,10 +15,17 @@ import com.tcc.printmobile.model.Img;
  */
 public class PrintConfig extends ActionBarActivity {
 
+    private Toolbar mToobar2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.configuracao_de_pagina);
+
+        mToobar2 = (Toolbar) findViewById(R.id.tb_confpagina);
+        mToobar2.setTitle("Configurar impressão");
+        mToobar2.setLogo(R.mipmap.icon);
+        setSupportActionBar(mToobar2);
 
         Intent intent = getIntent();
 
@@ -29,6 +39,25 @@ public class PrintConfig extends ActionBarActivity {
             Img img = new Img(false, false, 0l);
             img.setByteOfObj(images);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
