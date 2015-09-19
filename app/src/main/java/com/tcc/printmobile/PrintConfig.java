@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.tcc.printmobile.model.Img;
+import com.tcc.printmobile.model.Pdf;
 
 /**
  * Created by ddutra9 on 13/09/15.
@@ -16,6 +17,8 @@ import com.tcc.printmobile.model.Img;
 public class PrintConfig extends ActionBarActivity {
 
     private Toolbar mToobar2;
+    private Img img = null;
+    private Pdf pdf = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +31,20 @@ public class PrintConfig extends ActionBarActivity {
         setSupportActionBar(mToobar2);
 
         Intent intent = getIntent();
-
         Bundle params = intent.getExtras();
 
         Log.d("printconfig", "param imagem : " + params.isEmpty());
         if(params.containsKey("image"))
         {
             Log.d("printconfig", "tem imagem");
-            byte[] images = params.getByteArray("image");
-            Img img = new Img(false, false, 0l);
-            img.setByteOfObj(images);
+            byte[] bImage = params.getByteArray("image");
+            img = new Img(false, false, 0l);
+            img.setByteOfObj(bImage);
+        } else {
+            Log.d("printconfig", "tem pdf");
+            byte[] bPdf = params.getByteArray("pdf");
+            pdf = new Pdf(false, false, 1l, null);
+            pdf.setByteOfObj(bPdf);
         }
     }
 
