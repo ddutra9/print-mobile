@@ -7,9 +7,15 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Switch;
 
+import com.tcc.printmobile.model.File;
 import com.tcc.printmobile.model.Img;
 import com.tcc.printmobile.model.Pdf;
+import com.tcc.printmobile.service.PostFile;
 
 /**
  * Created by ddutra9 on 13/09/15.
@@ -19,6 +25,7 @@ public class PrintConfig extends ActionBarActivity {
     private Toolbar mToobar2;
     private Img img = null;
     private Pdf pdf = null;
+    private File file = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,19 +40,57 @@ public class PrintConfig extends ActionBarActivity {
         Intent intent = getIntent();
         Bundle params = intent.getExtras();
 
-        Log.d("printconfig", "param imagem : " + params.isEmpty());
         if(params.containsKey("image"))
         {
             Log.d("printconfig", "tem imagem");
             byte[] bImage = params.getByteArray("image");
             img = new Img(false, false, 0l);
             img.setByteOfObj(bImage);
+            file = img;
+            EditText etIntervalo = (EditText) findViewById(R.id.etIntervalo);
+            etIntervalo.setVisibility(View.INVISIBLE);
         } else {
             Log.d("printconfig", "tem pdf");
             byte[] bPdf = params.getByteArray("pdf");
             pdf = new Pdf(false, false, 1l, null);
             pdf.setByteOfObj(bPdf);
+            file = pdf;
         }
+
+        Button btnPrint = (Button) findViewById(R.id.btImprimir);
+
+        btnPrint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                populate();
+                PostFile postFile = new PostFile();
+                //postFile.postData(file);
+            }
+        });
+    }
+
+    private void populate(){
+        if(pdf != null){
+            EditText etIntervalo = (EditText) findViewById(R.id.etIntervalo);
+            pdf.setIntervalPage(etIntervalo.getText().toString());
+        }
+
+        Switch swtColor = (Switch) findViewById(R.id.swtColor);
+        Switch swtPaisagem = (Switch) findViewById(R.id.swtPaisagem);
+        EditText edCopies = (EditText) findViewById(R.id.edCopies);
+
+        file.setColorful(swtColor.isChecked());
+        file.setLandscape(swtPaisagem.isChecked());
+        if(isEmpty(edCopies)) {
+            file.setCopies(Long.parseLong(edCopies.getText().toString()));
+            Log.d("copies", "" + Long.parseLong(edCopies.getText().toString()));
+        }
+
+        Log.d("populate", file.toString());
+    }
+
+    private boolean isEmpty(EditText myeditText) {
+        return myeditText.getText().toString().isEmpty();
     }
 
     @Override
