@@ -47,7 +47,9 @@
         android:layout_alignStart="@+id/swtPaisagem"
         android:layout_marginTop="20dp"
         android:hint="Interv. Pag. (Ex.: 2-5)"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:layout_alignRight="@+id/swtPaisagem"
+        android:layout_alignEnd="@+id/swtPaisagem" />
 
     <Button
         android:layout_width="wrap_content"
@@ -62,17 +64,6 @@
         android:layout_alignStart="@+id/etIntervalo"
         android:theme="@style/Theme.AppCompat.NoActionBar" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Todas"
-        android:id="@+id/cbPrintAll"
-        android:layout_alignTop="@+id/etIntervalo"
-        android:layout_alignRight="@+id/swtColor"
-        android:layout_alignEnd="@+id/swtColor"
-        android:layout_marginTop="5dp"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -80,12 +71,10 @@
         android:id="@+id/edCopies"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:layout_above="@+id/btImprimir"
-        android:layout_alignRight="@+id/cbPrintAll"
-        android:layout_alignEnd="@+id/cbPrintAll"
         android:layout_marginBottom="27dp"
-        android:layout_alignLeft="@+id/cbPrintAll"
-        android:layout_alignStart="@+id/cbPrintAll"
-        android:inputType="number" />
+        android:inputType="number"
+        android:layout_alignRight="@+id/swtColor"
+        android:layout_alignEnd="@+id/swtColor" />
 
     <TextView
         android:layout_width="wrap_content"
