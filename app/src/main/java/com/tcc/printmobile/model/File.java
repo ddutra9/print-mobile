@@ -53,4 +53,10 @@ public abstract class File implements Serializable {
 	public void setByteOfObj(byte[] byteOfObj) {
 		this.byteOfObj = byteOfObj;
 	}
+
+	@Override
+	public String toString(){
+		return "colorful: '" + getColorful() + "', landscape: '" + getLandscape() + "', copies: '" + getCopies() + "'";
+	}
+
 }

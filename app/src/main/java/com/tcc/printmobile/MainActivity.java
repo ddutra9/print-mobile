@@ -58,8 +58,21 @@ public class MainActivity extends ActionBarActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
 			Log.d("imagem teste", data.toString());
-		} else {
+
+			Intent intent = new Intent(getApplicationContext(), PrintConfig.class);
+			Bundle params = new Bundle();
+			params.putByteArray("image", data.getByteArrayExtra("image"));
+			intent.putExtras(params);
+			startActivity(intent);
+
+		} else if(resultCode == Activity.RESULT_OK) {
 			Log.d("pdf teste", data.toString());//here i am not sure if content here is a pdf or another file
+
+			Intent intent = new Intent(getApplicationContext(), PrintConfig.class);
+			Bundle params = new Bundle();
+			params.putByteArray("pdf", data.getByteArrayExtra("pdf"));
+			intent.putExtras(params);
+			startActivity(intent);
 		}
 	}
 
