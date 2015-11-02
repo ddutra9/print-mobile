@@ -11,11 +11,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.tcc.printmobile.model.File;
 import com.tcc.printmobile.model.Img;
 import com.tcc.printmobile.model.Pdf;
 import com.tcc.printmobile.service.PostFile;
+
+import org.apache.http.HttpException;
 
 /**
  * Created by ddutra9 on 13/09/15.
@@ -64,7 +67,12 @@ public class PrintConfig extends ActionBarActivity {
             public void onClick(View v) {
                 populate();
                 PostFile postFile = new PostFile();
-                //postFile.postData(file);
+                try {
+                    postFile.postData(file);
+                    Toast.makeText(getApplicationContext(), "Impresso com sucesso!", Toast.LENGTH_LONG).show();
+                } catch (HttpException e) {
+                    Toast.makeText(getApplicationContext(), "Erro ao imprimir arquivo!", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

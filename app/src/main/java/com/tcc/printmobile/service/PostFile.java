@@ -17,7 +17,7 @@ import java.io.IOException;
 
 public class PostFile {
 	HttpClient httpclient = new DefaultHttpClient();
-	HttpPost httppost = new HttpPost("http://www.yoursite.com/script.php");
+	HttpPost httppost = null;
 
 	public void postData(File file) throws HttpException {
 		try {
@@ -29,8 +29,11 @@ public class PostFile {
 				object.put("byteOfObj", file.getLandscape());
 				object.put("copies", file.getLandscape());
 
-				if(file instanceof Pdf)
+				if(file instanceof Pdf) {
 					object.put("intervalPage", file.getLandscape());
+					httppost = new HttpPost("http://192.168.1.160/printmobile-web/print/pdf");
+				} else
+					httppost = new HttpPost("http://192.168.1.160/printmobile-web/print/image");
 
 			} catch (JSONException e) {
 				e.printStackTrace();
