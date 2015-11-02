@@ -3,6 +3,7 @@ package com.tcc.printmobile.service;
 import com.tcc.printmobile.model.File;
 import com.tcc.printmobile.model.Pdf;
 
+import org.apache.http.HttpException;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -18,7 +19,7 @@ public class PostFile {
 	HttpClient httpclient = new DefaultHttpClient();
 	HttpPost httppost = new HttpPost("http://www.yoursite.com/script.php");
 
-	public void postData(File file) {
+	public void postData(File file) throws HttpException {
 		try {
 			JSONObject object = new JSONObject();
 
@@ -41,8 +42,8 @@ public class PostFile {
 			// Execute HTTP Post Request
 			HttpResponse response = httpclient.execute(httppost);
 			if (response != null) {
-				//if (response.getStatusLine().getStatusCode() == 200)
-					//mensagem aqui
+				if (response.getStatusLine().getStatusCode() != 200)
+					throw new HttpException("Server error: " + response.getStatusLine().getStatusCode());
 			}
 
 		} catch (ClientProtocolException e) {
