@@ -2,6 +2,7 @@ package com.tcc.printmobile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.tcc.printmobile.model.File;
 import com.tcc.printmobile.model.Img;
@@ -64,7 +66,8 @@ public class PrintConfig extends ActionBarActivity {
             public void onClick(View v) {
                 populate();
                 PostFile postFile = new PostFile();
-                //postFile.postData(file);
+                postFile.postData(file);
+                Toast.makeText(getApplicationContext(), "Impresso com sucesso!", Toast.LENGTH_LONG).show();
             }
         });
     }

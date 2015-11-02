@@ -41,8 +41,12 @@ public class PostFile {
 			// Execute HTTP Post Request
 			HttpResponse response = httpclient.execute(httppost);
 			if (response != null) {
-				//if (response.getStatusLine().getStatusCode() == 200)
-					//mensagem aqui
+				if (response.getStatusLine().getStatusCode() == 200){
+
+
+
+				}
+
 			}
 
 		} catch (ClientProtocolException e) {

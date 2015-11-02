@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 'Google Inc.:Google APIs:21'
-    buildToolsVersion "23.0.0 rc2"
+    compileSdkVersion 'Google Inc.:Google APIs:23'
+    buildToolsVersion "23.0.0"
 
     defaultConfig {
         applicationId "com.tcc.printmobile"
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 21
     }
 
     buildTypes {
@@ -20,7 +20,10 @@ android {
 
 dependencies {
     compile files('libs/commons-io-2.4.jar')
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.google.android.gms:play-services:7.5.0'
-    compile 'com.android.support:design:22.2.0'
+    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.google.android.gms:play-services:8.1.0'
+    compile 'com.android.support:design:23.1.0'
+    compile 'com.google.android.gms:play-services-ads:8.1.0'
+    compile 'com.google.android.gms:play-services-identity:8.1.0'
+    compile 'com.google.android.gms:play-services-gcm:8.1.0'
 }
