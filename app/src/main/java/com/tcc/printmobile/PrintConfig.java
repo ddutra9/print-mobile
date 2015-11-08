@@ -18,7 +18,7 @@ import com.tcc.printmobile.model.Img;
 import com.tcc.printmobile.model.Pdf;
 import com.tcc.printmobile.service.PostFile;
 
-import org.apache.http.HttpException;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by ddutra9 on 13/09/15.
@@ -67,12 +67,19 @@ public class PrintConfig extends ActionBarActivity {
             public void onClick(View v) {
                 populate();
                 PostFile postFile = new PostFile();
+                postFile.execute(file);
+
                 try {
-                    postFile.postData(file);
-                    Toast.makeText(getApplicationContext(), "Impresso com sucesso!", Toast.LENGTH_LONG).show();
-                } catch (HttpException e) {
-                    Toast.makeText(getApplicationContext(), "Erro ao imprimir arquivo!", Toast.LENGTH_LONG).show();
+                    if(postFile.get() != null)
+                        Toast.makeText(getApplicationContext(), "Impresso com sucesso!", Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(getApplicationContext(), postFile.get(), Toast.LENGTH_LONG).show();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
                 }
+                //Toast.makeText(getApplicationContext(), "Erro ao imprimir arquivo!", Toast.LENGTH_LONG).show();
             }
         });
     }

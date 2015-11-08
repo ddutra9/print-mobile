@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
-=======
-      <module fileurl="file://$PROJECT_DIR$/PrintMobile.iml" filepath="$PROJECT_DIR$/PrintMobile.iml" />
->>>>>>> 4adb9081c1d1f4c2347baffd62be96e094e97c32
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/print-mobile.iml" filepath="$PROJECT_DIR$/print-mobile.iml" />
     </modules>

@@ -1,9 +1,10 @@
 package com.tcc.printmobile.service;
 
+import android.os.AsyncTask;
+
 import com.tcc.printmobile.model.File;
 import com.tcc.printmobile.model.Pdf;
 
-import org.apache.http.HttpException;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -15,44 +16,51 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class PostFile {
+public class PostFile extends AsyncTask<File, Void, String> {
 	HttpClient httpclient = new DefaultHttpClient();
 	HttpPost httppost = null;
 
-	public void postData(File file) throws HttpException {
-		try {
-			JSONObject object = new JSONObject();
-
+	@Override
+	protected String doInBackground(File... params) {
+		for (File file : params) {
 			try {
-				object.put("colorful", file.getColorful());
-				object.put("landscape", file.getLandscape());
-				object.put("byteOfObj", file.getLandscape());
-				object.put("copies", file.getLandscape());
+				JSONObject object = new JSONObject();
 
-				if(file instanceof Pdf) {
-					object.put("intervalPage", file.getLandscape());
-					httppost = new HttpPost("http://192.168.1.160/printmobile-web/print/pdf");
-				} else
-					httppost = new HttpPost("http://192.168.1.160/printmobile-web/print/image");
+				try {
+					object.put("colorful", file.getColorful());
+					object.put("landscape", file.getLandscape());
+					object.put("byteOfObj", file.getLandscape());
+					object.put("copies", file.getLandscape());
 
-			} catch (JSONException e) {
-				e.printStackTrace();
+					if(file instanceof Pdf) {
+						object.put("intervalPage", file.getLandscape());
+						httppost = new HttpPost("http://192.168.1.160/printmobile-web/print/pdf");
+					} else
+						httppost = new HttpPost("http://192.168.1.160/printmobile-web/print/image");
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+
+				httppost.setEntity(new StringEntity(object.toString(), "UTF8"));
+				httppost.setHeader("Content-type", "application/json");
+
+				// Execute HTTP Post Request
+				HttpResponse response = httpclient.execute(httppost);
+				if (response != null) {
+					if (response.getStatusLine().getStatusCode() != 200)
+						return  "Server error: " + response.getStatusLine().getStatusCode();
+				}
+
+			} catch (ClientProtocolException e) {
+				return e.getMessage().toString();
+			} catch (IOException e) {
+				return e.getMessage().toString();
 			}
-
-			httppost.setEntity(new StringEntity(object.toString(), "UTF8"));
-			httppost.setHeader("Content-type", "application/json");
-
-			// Execute HTTP Post Request
-			HttpResponse response = httpclient.execute(httppost);
-			if (response != null) {
-				if (response.getStatusLine().getStatusCode() != 200)
-					throw new HttpException("Server error: " + response.getStatusLine().getStatusCode());
-			}
-
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
 		}
+
+		return null;
 	}
+
+
 }
