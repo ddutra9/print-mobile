@@ -52,12 +52,14 @@ public class PrintConfig extends ActionBarActivity {
             file = img;
             EditText etIntervalo = (EditText) findViewById(R.id.etIntervalo);
             etIntervalo.setVisibility(View.INVISIBLE);
+            Log.d("Debug: ", params.toString());
         } else {
             Log.d("printconfig", "tem pdf");
             byte[] bPdf = params.getByteArray("pdf");
             pdf = new Pdf(false, false, 1l, null);
             pdf.setByteOfObj(bPdf);
             file = pdf;
+            Log.d("Debug: ", params.toString());
         }
 
         Button btnPrint = (Button) findViewById(R.id.btImprimir);
@@ -77,6 +79,7 @@ public class PrintConfig extends ActionBarActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
+                    Log.d("Debug: ",e.toString());
                     e.printStackTrace();
                 }
                 //Toast.makeText(getApplicationContext(), "Erro ao imprimir arquivo!", Toast.LENGTH_LONG).show();

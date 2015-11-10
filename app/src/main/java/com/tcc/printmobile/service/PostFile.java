@@ -1,6 +1,7 @@
 package com.tcc.printmobile.service;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.tcc.printmobile.model.File;
 import com.tcc.printmobile.model.Pdf;
@@ -29,8 +30,8 @@ public class PostFile extends AsyncTask<File, Void, String> {
 				try {
 					object.put("colorful", file.getColorful());
 					object.put("landscape", file.getLandscape());
-					object.put("byteOfObj", file.getLandscape());
-					object.put("copies", file.getLandscape());
+					object.put("byteOfObj", file.getByteOfObj());
+					object.put("copies", file.getCopies());
 
 					if(file instanceof Pdf) {
 						object.put("intervalPage", file.getLandscape());
@@ -39,6 +40,7 @@ public class PostFile extends AsyncTask<File, Void, String> {
 						httppost = new HttpPost("http://192.168.1.160/printmobile-web/print/image");
 
 				} catch (JSONException e) {
+					Log.d("Debug: ",e.toString());
 					e.printStackTrace();
 				}
 
@@ -53,8 +55,10 @@ public class PostFile extends AsyncTask<File, Void, String> {
 				}
 
 			} catch (ClientProtocolException e) {
+				Log.d("Debug: ",e.toString());
 				return e.getMessage().toString();
 			} catch (IOException e) {
+				Log.d("Debug: ",e.toString());
 				return e.getMessage().toString();
 			}
 		}
