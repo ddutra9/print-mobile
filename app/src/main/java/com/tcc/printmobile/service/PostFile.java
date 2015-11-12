@@ -1,6 +1,7 @@
 package com.tcc.printmobile.service;
 
 import android.os.AsyncTask;
+import android.util.Base64;
 import android.util.Log;
 
 import com.tcc.printmobile.model.File;
@@ -30,14 +31,17 @@ public class PostFile extends AsyncTask<File, Void, String> {
 				try {
 					object.put("colorful", file.getColorful());
 					object.put("landscape", file.getLandscape());
-					object.put("byteOfObj", file.getByteOfObj());
-					object.put("copies", file.getCopies());
+					object.put("copies", 1);
+					Log.d("json_Object: ", object.toString());
+					object.put("byteBase64", Base64.encodeToString(file.getByteOfObj(),
+							Base64.DEFAULT));
 
+					Log.d("json_Object: ", object.get("byteBase64").toString());
 					if(file instanceof Pdf) {
 						object.put("intervalPage", file.getLandscape());
-						httppost = new HttpPost("http://192.168.1.160/printmobile-web/print/pdf");
+						httppost = new HttpPost("http://192.168.1.160:8080/printmobile-web/print/pdf");
 					} else
-						httppost = new HttpPost("http://192.168.1.160/printmobile-web/print/image");
+						httppost = new HttpPost("http://192.168.1.160:8080/printmobile-web/print/image");
 
 				} catch (JSONException e) {
 					Log.d("Debug: ",e.toString());
@@ -45,6 +49,7 @@ public class PostFile extends AsyncTask<File, Void, String> {
 				}
 
 				httppost.setEntity(new StringEntity(object.toString(), "UTF8"));
+				httppost.setHeader("Accept", "application/json");
 				httppost.setHeader("Content-type", "application/json");
 
 				// Execute HTTP Post Request

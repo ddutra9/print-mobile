@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -52,7 +53,8 @@ public class PrintConfig extends ActionBarActivity {
             file = img;
             EditText etIntervalo = (EditText) findViewById(R.id.etIntervalo);
             etIntervalo.setVisibility(View.INVISIBLE);
-            Log.d("Debug: ", params.toString());
+            Log.d("Debug_img: ", file.getByteOfObj().toString());
+            Log.d("img_base64", Base64.encodeToString(file.getByteOfObj(), Base64.NO_WRAP));
         } else {
             Log.d("printconfig", "tem pdf");
             byte[] bPdf = params.getByteArray("pdf");

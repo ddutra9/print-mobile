@@ -2,7 +2,12 @@ package com.tcc.printmobile;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -10,6 +15,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -61,7 +72,11 @@ public class MainActivity extends ActionBarActivity {
 
 			Intent intent = new Intent(getApplicationContext(), PrintConfig.class);
 			Bundle params = new Bundle();
-			params.putByteArray("image", data.getByteArrayExtra("image"));
+			try {
+				params.putByteArray("image", getBytesFromBitmap(data.getData()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			intent.putExtras(params);
 			startActivity(intent);
 
@@ -74,6 +89,38 @@ public class MainActivity extends ActionBarActivity {
 			intent.putExtras(params);
 			startActivity(intent);
 		}
+	}
+
+	public byte[] getBytesFromBitmap(Uri uri) throws IOException {
+		File imagefile = new File(getPath(uri));
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream(imagefile);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		Log.d("file_stream", fis.toString());
+		Bitmap bitmap = BitmapFactory.decodeStream(fis);
+
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+
+		return stream.toByteArray();
+	}
+
+	public String getPath(Uri uri){
+		String[] projection = { MediaStore.Images.Media.DATA };
+
+		Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+		cursor.moveToFirst();
+		int columnIndex = cursor.getColumnIndex(projection[0]);
+		String picturePath = cursor.getString(columnIndex); // returns null
+		Log.d("picture_path", picturePath);
+		cursor.close();
+
+		return  picturePath;
 	}
 
 	@Override
