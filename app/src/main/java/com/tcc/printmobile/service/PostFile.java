@@ -34,7 +34,7 @@ public class PostFile extends AsyncTask<File, Void, String> {
 					object.put("copies", 1);
 					Log.d("json_Object: ", object.toString());
 					object.put("byteBase64", Base64.encodeToString(file.getByteOfObj(),
-							Base64.DEFAULT));
+							Base64.NO_WRAP));
 
 					Log.d("json_Object: ", object.get("byteBase64").toString());
 					if(file instanceof Pdf) {
