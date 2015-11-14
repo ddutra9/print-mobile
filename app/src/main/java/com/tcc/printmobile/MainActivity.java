@@ -17,10 +17,8 @@ import android.view.View;
 import android.widget.Button;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -92,17 +90,18 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	public byte[] getBytesFromBitmap(Uri uri) throws IOException {
-		File imagefile = new File(getPath(uri));
-		FileInputStream fis = null;
-		try {
-			fis = new FileInputStream(imagefile);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		File imagefile = new File(getPath(uri));
+//		FileInputStream fis = null;
+//		try {
+//			fis = new FileInputStream(imagefile);
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
-		Log.d("file_stream", fis.toString());
-		Bitmap bitmap = BitmapFactory.decodeStream(fis);
+		InputStream is = getContentResolver().openInputStream(uri);
+		Log.d("input_stream", is.toString());
+		Bitmap bitmap = BitmapFactory.decodeStream(is);
 
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
