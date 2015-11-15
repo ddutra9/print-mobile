@@ -2,12 +2,10 @@ package com.tcc.printmobile;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import org.apache.commons.io.IOUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -83,22 +83,17 @@ public class MainActivity extends ActionBarActivity {
 
 			Intent intent = new Intent(getApplicationContext(), PrintConfig.class);
 			Bundle params = new Bundle();
-			params.putByteArray("pdf", data.getByteArrayExtra("pdf"));
+			try {
+				params.putByteArray("pdf", getBytesToPdf(data.getData()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			intent.putExtras(params);
 			startActivity(intent);
 		}
 	}
 
 	public byte[] getBytesFromBitmap(Uri uri) throws IOException {
-//		File imagefile = new File(getPath(uri));
-//		FileInputStream fis = null;
-//		try {
-//			fis = new FileInputStream(imagefile);
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
 		InputStream is = getContentResolver().openInputStream(uri);
 		Log.d("input_stream", is.toString());
 		Bitmap bitmap = BitmapFactory.decodeStream(is);
@@ -109,17 +104,25 @@ public class MainActivity extends ActionBarActivity {
 		return stream.toByteArray();
 	}
 
-	public String getPath(Uri uri){
-		String[] projection = { MediaStore.Images.Media.DATA };
-
-		Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-		cursor.moveToFirst();
-		int columnIndex = cursor.getColumnIndex(projection[0]);
-		String picturePath = cursor.getString(columnIndex); // returns null
-		Log.d("picture_path", picturePath);
-		cursor.close();
-
-		return  picturePath;
+	public byte[] getBytesToPdf(Uri uri) throws IOException {
+		InputStream is = getContentResolver().openInputStream(uri);
+		Log.d("input_stream", is.toString());
+		return IOUtils.toByteArray(is);
+//		// this dynamically extends to take the bytes you read
+//		ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+//
+//		// this is storage overwritten on each iteration with bytes
+//		int bufferSize = 1024;
+//		byte[] buffer = new byte[bufferSize];
+//
+//		// we need to know how may bytes were read to write them to the byteBuffer
+//		int len = 0;
+//		while ((len = is.read(buffer)) != -1) {
+//			byteBuffer.write(buffer, 0, len);
+//		}
+//
+//		// and then we can return your byte array.
+//		return byteBuffer.toByteArray();
 	}
 
 	@Override
