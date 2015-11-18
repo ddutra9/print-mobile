@@ -13,7 +13,7 @@ public class Pdf extends File {
 		this.intervalPage = intervalPage;
 	}
 	
-	public Pdf(Boolean colorful, Boolean landscape, Long copies, String intervalPage) {		
+	public Pdf(Boolean colorful, Boolean landscape, int copies, String intervalPage) {
 		super(colorful, landscape, copies);
 		this.intervalPage = intervalPage;
 	}

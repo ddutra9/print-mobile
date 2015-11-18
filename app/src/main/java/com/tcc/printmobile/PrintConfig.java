@@ -48,7 +48,7 @@ public class PrintConfig extends ActionBarActivity {
         {
             Log.d("printconfig", "tem imagem");
             byte[] bImage = params.getByteArray("image");
-            img = new Img(false, false, 0l);
+            img = new Img(false, false, 0);
             img.setByteOfObj(bImage);
             file = img;
             EditText etIntervalo = (EditText) findViewById(R.id.etIntervalo);
@@ -58,7 +58,7 @@ public class PrintConfig extends ActionBarActivity {
         } else {
             Log.d("printconfig", "tem pdf");
             byte[] bPdf = params.getByteArray("pdf");
-            pdf = new Pdf(false, false, 1l, null);
+            pdf = new Pdf(false, false, 1, null);
             pdf.setByteOfObj(bPdf);
             file = pdf;
             Log.d("Debug: ", params.toString());
@@ -103,7 +103,7 @@ public class PrintConfig extends ActionBarActivity {
         file.setLandscape(swtPaisagem.isChecked());
         if(isEmpty(edCopies)) {
             file.setCopies(Integer.parseInt(edCopies.getText().toString()));
-            Log.d("copies", "" + Long.parseLong(edCopies.getText().toString()));
+            Log.d("copies", "" + Integer.parseInt(edCopies.getText().toString()));
         }
 
         Log.d("populate", file.toString());
