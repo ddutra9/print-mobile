@@ -31,7 +31,7 @@ public class PostFile extends AsyncTask<File, Void, String> {
 				try {
 					object.put("colorful", file.getColorful());
 					object.put("landscape", file.getLandscape());
-					object.put("copies", 1);
+					object.put("copies", file.getCopies());
 					Log.d("json_Object: ", object.toString());
 					object.put("byteBase64", Base64.encodeToString(file.getByteOfObj(),
 							Base64.NO_WRAP));

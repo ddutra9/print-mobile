@@ -102,7 +102,7 @@ public class PrintConfig extends ActionBarActivity {
         file.setColorful(swtColor.isChecked());
         file.setLandscape(swtPaisagem.isChecked());
         if(isEmpty(edCopies)) {
-            file.setCopies(Long.parseLong(edCopies.getText().toString()));
+            file.setCopies(Integer.parseInt(edCopies.getText().toString()));
             Log.d("copies", "" + Long.parseLong(edCopies.getText().toString()));
         }
 

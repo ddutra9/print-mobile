@@ -9,13 +9,13 @@ public abstract class File implements Serializable {
 	private Boolean colorful;
 	private Boolean landscape;
 	private byte[] byteOfObj;
-	private Long copies;
+	private int copies;
 
 	public File() {
 		super();
 	}
 
-	public File(Boolean colorful, Boolean landscape, Long copies) {
+	public File(Boolean colorful, Boolean landscape, int copies) {
 		this();
 		this.colorful = colorful;
 		this.landscape = landscape;
@@ -38,11 +38,11 @@ public abstract class File implements Serializable {
 		this.landscape = landscape;
 	}
 
-	public Long getCopies() {
+	public int getCopies() {
 		return copies;
 	}
 
-	public void setCopies(Long copies) {
+	public void setCopies(int copies) {
 		this.copies = copies;
 	}
 
