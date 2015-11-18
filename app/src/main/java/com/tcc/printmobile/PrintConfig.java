@@ -40,6 +40,7 @@ public class PrintConfig extends ActionBarActivity {
         mToobar2.setTitle("Configurar impressão");
         mToobar2.setLogo(R.mipmap.icon);
         setSupportActionBar(mToobar2);
+        Switch swtPaisagem_2 = (Switch) findViewById(R.id.swtPaisagem);
 
         Intent intent = getIntent();
         Bundle params = intent.getExtras();
@@ -57,6 +58,9 @@ public class PrintConfig extends ActionBarActivity {
             Log.d("img_base64", Base64.encodeToString(file.getByteOfObj(), Base64.NO_WRAP));
         } else {
             Log.d("printconfig", "tem pdf");
+            EditText etIntervalo = (EditText) findViewById(R.id.etIntervalo);
+            swtPaisagem_2.setVisibility(View.INVISIBLE);
+            etIntervalo.setVisibility(View.INVISIBLE);
             byte[] bPdf = params.getByteArray("pdf");
             pdf = new Pdf(false, false, 1, null);
             pdf.setByteOfObj(bPdf);
@@ -74,14 +78,14 @@ public class PrintConfig extends ActionBarActivity {
                 postFile.execute(file);
 
                 try {
-                    if(postFile.get() != null)
+                    if (postFile.get() != null)
                         Toast.makeText(getApplicationContext(), "Impresso com sucesso!", Toast.LENGTH_LONG).show();
                     else
                         Toast.makeText(getApplicationContext(), postFile.get(), Toast.LENGTH_LONG).show();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
-                    Log.d("Debug: ",e.toString());
+                    Log.d("Debug: ", e.toString());
                     e.printStackTrace();
                 }
                 //Toast.makeText(getApplicationContext(), "Erro ao imprimir arquivo!", Toast.LENGTH_LONG).show();
@@ -95,7 +99,7 @@ public class PrintConfig extends ActionBarActivity {
             pdf.setIntervalPage(etIntervalo.getText().toString());
         }
 
-        Switch swtColor = (Switch) findViewById(R.id.swtColor);
+        Switch swtColor = (Switch) findViewById(R.id.swtPaisagem);
         Switch swtPaisagem = (Switch) findViewById(R.id.swtPaisagem);
         EditText edCopies = (EditText) findViewById(R.id.edCopies);
 

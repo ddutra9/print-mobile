@@ -17,24 +17,13 @@
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Colorido                                                 "
-        android:id="@+id/swtColor"
-        android:layout_below="@+id/tb_confpagina"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:textSize="16dp"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Paisagem                                              "
         android:id="@+id/swtPaisagem"
-        android:layout_below="@+id/swtColor"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="81dp"
         android:textSize="16dp"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:layout_below="@+id/tb_confpagina"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -42,14 +31,14 @@
         android:inputType="text"
         android:ems="10"
         android:id="@+id/etIntervalo"
+        android:hint="Interv. Pag. (Ex.: 2-5)"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:layout_below="@+id/swtPaisagem"
         android:layout_alignLeft="@+id/swtPaisagem"
         android:layout_alignStart="@+id/swtPaisagem"
-        android:layout_marginTop="20dp"
-        android:hint="Interv. Pag. (Ex.: 2-5)"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:layout_alignRight="@+id/swtPaisagem"
-        android:layout_alignEnd="@+id/swtPaisagem" />
+        android:layout_alignEnd="@+id/swtPaisagem"
+        android:layout_marginTop="23dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -73,8 +62,8 @@
         android:layout_above="@+id/btImprimir"
         android:layout_marginBottom="27dp"
         android:inputType="number"
-        android:layout_alignRight="@+id/swtColor"
-        android:layout_alignEnd="@+id/swtColor" />
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
 
     <TextView
         android:layout_width="wrap_content"
